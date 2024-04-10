@@ -8,6 +8,7 @@ const Admin = require("../models/adminModel"); // Assuming models are in a separ
 // Create an Express router
 const router = express.Router();
 
+//admin login completed
 router.post("/loginadmin", async (req, res) => {
   try {
     const input = req.body;
@@ -33,6 +34,7 @@ router.post("/loginadmin", async (req, res) => {
   }
 });
 
+//admin singup completed
 router.post("/admin/register", async (req, res) => {
   try {
     const input = req.body;
@@ -54,7 +56,7 @@ router.post("/admin/register", async (req, res) => {
   }
 });
 
-// Route for user login
+// user login completed
 router.post("/loginuser", async (req, res) => {
   try {
     const input = req.body;
@@ -79,6 +81,8 @@ router.post("/loginuser", async (req, res) => {
   }
 });
 
+
+//user signup completed
 router.post("/user/register", async (req, res) => {
   try {
     const input = req.body;
@@ -105,5 +109,4 @@ router.post("/user/register", async (req, res) => {
   }
 });
 
-// Export the router
 module.exports = router;
