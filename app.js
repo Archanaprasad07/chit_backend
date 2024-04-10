@@ -1,12 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+
 const authRouter = require('./authRouter');
 const adminRouter = require('./adminRouter');
 const userRouter = require('./userRouter');
 const auctionRouter = require('./autionRouter');
-const bcrypt = require("bcryptjs")
 
 // Initialize Express app
 const app = express();
