@@ -57,15 +57,22 @@ router.post("/admin/register", async (req, res) => {
 // Route for user login
 router.post("/loginuser", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const input = req.body;
+    const user = await User.findOne({ username: input.username });
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({
+        status: "error",
+        error: "User not found",
+      });
     }
-    if (password !== user.password) {
+    if (input.password !== user.password) {
       return res.status(401).json({ error: "Invalid password" });
     }
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({
+      status: "success",
+      message: "Login successful",
+      data: user,
+    });
   } catch (error) {
     console.error("Error during login:", error);
     res.status(500).json({ error: "Internal server error" });
