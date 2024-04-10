@@ -37,7 +37,6 @@ const userSchema = new mongoose.Schema({
   chitId: {
     type: Number,
     required: true,
-    unique: true
   },
   role: {
     type: String,
