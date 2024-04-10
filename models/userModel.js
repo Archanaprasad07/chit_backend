@@ -33,7 +33,6 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
     required: true,
-    unique: true
   },
   chitId: {
     type: Number,

@@ -74,31 +74,24 @@ router.post("/loginuser", async (req, res) => {
 
 router.post("/user/register", async (req, res) => {
   try {
-    const { userId, username, password, name, email, phone, address, chitId } =
-      req.body;
-
+    const input = req.body;
     // Check if username already exists
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ username: input.username });
     if (existingUser) {
-      return res.status(400).json({ error: "Username is already taken" });
+      return res.status(400).json({
+        status: "error",
+        error: "Username is already taken",
+      });
     }
 
     // Create a new user instance
-    const newUser = new User({
-      userId,
-      username,
-      password,
-      name,
-      email,
-      phone,
-      address,
-      chitId,
-    });
-
+    const newUser = new User(input);
     // Save the user to the database
     await newUser.save();
-
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({
+      status: "success",
+      message: "User registered successfully",
+    });
   } catch (error) {
     console.error("Error during user registration:", error);
     res.status(500).json({ error: "Internal server error" });
