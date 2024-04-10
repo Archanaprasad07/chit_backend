@@ -2,17 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const authRouter = require('./authRouter');
-const adminRouter = require('./adminRouter');
-const userRouter = require('./userRouter');
-const auctionRouter = require('./autionRouter');
+const authRouter = require('./connectors/authRouter');
+const adminRouter = require('./connectors/adminRouter');
+const userRouter = require('./connectors/userRouter');
+const auctionRouter = require('./connectors/autionRouter');
 
 // Initialize Express app
 const app = express();
 
 // Middleware
 app.use(cors()); // Enable Cross-Origin Resource Sharing
-app.use(bodyParser.json()); // Parse JSON request bodies
+app.use(express.json()); // Parse JSON request bodies
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://archana2002:archana07@cluster0.zzcjkzd.mongodb.net/visitorDb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
