@@ -27,15 +27,19 @@ router.post("/loginadmin", async (req, res) => {
 
 router.post("/admin/register", async (req, res) => {
   try {
-    console.log("Request body:", req.body);
-    const { username, password, email, name } = req.body;
-    const existingAdmins = await Admin.find({ username });
-    if (existingAdmins.length > 0) {
-      return res.status(400).json({ error: "Admin already exists" });
+    const input = req.body;
+    const existingAdmins = await Admin.findOne({ username: input.username });
+    if (existingAdmins) {
+      return res.status(400).json({
+        error: "Admin already exists",
+      });
     }
-    const admin = new Admin({ username, password, email, name });
+    const admin = new Admin(input);
     await admin.save();
-    res.status(201).json({ message: "Admin registered successfully" });
+    res.status(201).json({
+      status: "success",
+      message: "Admin registered successfully",
+    });
   } catch (error) {
     console.error("Error during admin registration:", error);
     res.status(500).json({ error: "Internal server error" });
