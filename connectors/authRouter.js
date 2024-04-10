@@ -10,15 +10,23 @@ const router = express.Router();
 
 router.post("/loginadmin", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const admin = await Admin.findOne({ username });
+    const input = req.body;
+    const admin = await Admin.findOne({ username: input.username });
     if (!admin) {
-      return res.status(404).json({ error: "Admin not found" });
+      return res.status(404).json({
+        error: "Admin not found",
+      });
     }
-    if (password !== admin.password) {
-      return res.status(401).json({ error: "Invalid password" });
+    if (input.password !== admin.password) {
+      return res.status(401).json({
+        error: "Invalid password",
+      });
     }
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({
+      status: "success",
+      message: "Login successful",
+      data: admin,
+    });
   } catch (error) {
     console.error("Error during admin login:", error);
     res.status(500).json({ error: "Internal server error" });
