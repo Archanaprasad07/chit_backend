@@ -21,10 +21,19 @@ const chitSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  people: {
-    type: Number,
-    required: true,
-  },
+  members: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      paymentStatus: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
   commission: {
     type: Number,
     required: true,

@@ -82,7 +82,7 @@ router.post("/loginuser", async (req, res) => {
 });
 
 
-//user signup
+//user register 
 router.post("/user/register", async (req, res) => {
   try {
     const input = req.body;

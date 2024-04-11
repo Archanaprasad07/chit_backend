@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true,
@@ -15,11 +19,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-    unique: true,
   },
   email: {
     type: String,
@@ -33,15 +32,6 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
     required: true,
-  },
-  chit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Chit",
-    required: true,
-  },
-  role: {
-    type: String,
-    default: "user",
   },
 });
 

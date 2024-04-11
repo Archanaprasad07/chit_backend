@@ -7,30 +7,9 @@ const User = require("../models/userModel");
 router.post("/chit/setup", async (req, res) => {
   try {
     // Extract chit details from request body
-    const {
-      chitId,
-      chitname,
-      totalAmount,
-      contribution,
-      installments,
-      people,
-      commission,
-    } = req.body;
-
-    // Create a new chit document
-    const newChit = new Chit({
-      chitId,
-      chitname,
-      totalAmount,
-      contribution,
-      installments,
-      people,
-      commission,
-    });
-
-    // Save the new chit to the database
+    let input = req.body;
+    const newChit = new Chit(input);
     await newChit.save();
-
     res.status(201).json({
       status: "success",
       message: "Chit setup successful",
@@ -44,13 +23,20 @@ router.post("/chit/setup", async (req, res) => {
 router.get("/chit/view", async (req, res) => {
   try {
     // Find all chit documents
-    const allChits = await Chit.find();
-
+    const allChits = await Chit.find()
+      .populate({
+        path: "members.userId",
+        select: "username email",
+      })
+      .exec();
     if (!allChits || allChits.length === 0) {
       return res.status(404).json({ error: "No chits found" });
     }
 
-    res.status(200).json(allChits);
+    res.status(200).json({
+      status: "success",
+      data: allChits,
+    });
   } catch (error) {
     console.error("Error viewing chits:", error);
     res.status(500).json({ error: "Internal server error" });
