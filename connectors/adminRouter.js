@@ -26,13 +26,15 @@ router.post("/chit/setup", async (req, res) => {
       installments,
       people,
       commission,
-      bids: [], // Initialize bids array
     });
 
     // Save the new chit to the database
     await newChit.save();
 
-    res.status(201).json({ message: "Chit setup successful" });
+    res.status(201).json({
+      status: "success",
+      message: "Chit setup successful",
+    });
   } catch (error) {
     console.error("Error setting up chit:", error);
     res.status(500).json({ error: "Internal server error" });

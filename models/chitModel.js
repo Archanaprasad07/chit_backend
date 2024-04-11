@@ -1,47 +1,34 @@
 const mongoose = require('mongoose');
 
-const bidSchema = new mongoose.Schema({
-  username: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  bidAmount: {
-    type: Number,
-    required: true
-  }
-});
-
 const chitSchema = new mongoose.Schema({
   chitId: {
     type: Number,
-    required: true
+    required: true,
   },
   chitname: {
     type: String,
-    required: true
+    required: true,
   },
   totalAmount: {
     type: Number,
-    required: true
+    required: true,
   },
   contribution: {
     type: Number,
-    required: true
+    required: true,
   },
   installments: {
     type: Number,
-    required: true
+    required: true,
   },
   people: {
     type: Number,
-    required: true
+    required: true,
   },
   commission: {
     type: Number,
-    required: true
+    required: true,
   },
-
-  bids: [bidSchema]
 });
 
 const Chit = mongoose.model('Chit', chitSchema);

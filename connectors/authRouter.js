@@ -56,7 +56,7 @@ router.post("/admin/register", async (req, res) => {
   }
 });
 
-// user login completed
+// user login
 router.post("/loginuser", async (req, res) => {
   try {
     const input = req.body;
@@ -82,7 +82,7 @@ router.post("/loginuser", async (req, res) => {
 });
 
 
-//user signup completed
+//user signup
 router.post("/user/register", async (req, res) => {
   try {
     const input = req.body;
@@ -94,7 +94,6 @@ router.post("/user/register", async (req, res) => {
         error: "Username is already taken",
       });
     }
-
     // Create a new user instance
     const newUser = new User(input);
     // Save the user to the database
